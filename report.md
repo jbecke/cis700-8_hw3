@@ -145,3 +145,21 @@ Finally, adding another dense layer of size 128 with ReLU activation gives us th
 2016 test accuracy: 
 0.7017637626937466
 ```
+
+
+## NN error anylysis
+
+Compared to the sentiment model, which predicts "Alice messaged a cute guy she saw on Tinder," the neural network model gets this one right:
+```
+['Alice was getting married in a few weeks.', 'One night, her mother called and she forgot to call her back.', 'Her mother left an angry message on her phone.', 'She threatened not to come to the wedding.']
+```
+
+"Alice called her mother and apologized profusely." This makes sense because, even if the NN doesn't have much world knowledge, a language model would naturally predict the last sentence; it follows much more naturally than the Tinder ending. The only reason the Tinder ending was predicted in the first case was because of the reliance on positive sentiment.
+
+On the other hand:
+
+```
+['Ted loves to go to the movies.', 'He sees almost everyone and votes at the Oscars.', 'He has a big party for the Oscars and they all place bets.', 'Ted almost always wins with the movies he chooses.']
+```
+
+The model predicts that he "stops watching movies" instead of "watches movies several times a week". While this is somewhat plausible, the latter ending makes more sense to a human. We think the model may be doing this because both sentences are gramantically and topically similar, and it requires deep understanding to know which to choose. Maybe if we trained a bigger model or trained for more iterations with a lower learning rate we could correctly predict this case.
